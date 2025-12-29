@@ -113,10 +113,10 @@ bool JlCompress::compressSubDir(QuaZip* zip, QString dir, QString origDir, bool 
         QuaZipFile dirZipFile(zip);
         std::unique_ptr<QuaZipNewInfo> qzni;
         if (options.getDateTime().isNull()) {
-            qzni = make_unique<QuaZipNewInfo>(origDirectory.relativeFilePath(dir) + QLatin1String("/"), dir);
+            qzni = std::make_unique<QuaZipNewInfo>(origDirectory.relativeFilePath(dir) + QLatin1String("/"), dir);
         }
         else {
-            qzni = make_unique<QuaZipNewInfo>(origDirectory.relativeFilePath(dir) + QLatin1String("/"), dir, options.getDateTime());
+            qzni = std::make_unique<QuaZipNewInfo>(origDirectory.relativeFilePath(dir) + QLatin1String("/"), dir, options.getDateTime());
         }
         if (!dirZipFile.open(QIODevice::WriteOnly, *qzni, nullptr, 0, 0)) {
             return false;

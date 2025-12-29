@@ -5,7 +5,9 @@ DEFINES += QUAZIP_BUILD
 #CONFIG += staticlib
 CONFIG += c++11
 
-include(../common.pri)
+shareRoot = $$PWD/../share
+include($$shareRoot/common/common.pri)
+
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
@@ -26,6 +28,7 @@ SOURCES += \
     src/unzip.c \
     src/zip.c
 
+message(mjc:$$shareRoot/../zlib1.3.1Lib/include/zip.h)
 HEADERS += \
     include/JlCompress.h \
     include/ioapi.h \
@@ -50,7 +53,9 @@ HEADERS += \
 
 
 
+INCLUDEPATH+=$$shareRoot/../zlib1.3.1Lib/include
 INCLUDEPATH+=$$PWD/include
+LIBS+=-L"$$shareRoot/../zlib1.3.1Lib/lib" -lzlibstaticd
 # Default rules for deployment.
 unix {
     target.path = /usr/lib
