@@ -28,7 +28,6 @@ SOURCES += \
     src/unzip.c \
     src/zip.c
 
-message(mjc:$$shareRoot/../zlib1.3.1Lib/include/zip.h)
 HEADERS += \
     include/JlCompress.h \
     include/ioapi.h \
@@ -49,13 +48,12 @@ HEADERS += \
     include/zip.h
 
 
-
-
-
-
 INCLUDEPATH+=$$shareRoot/../zlib1.3.1Lib/include
 INCLUDEPATH+=$$PWD/include
-LIBS+=-L"$$shareRoot/../zlib1.3.1Lib/lib" -lzlibstaticd
+win32:msvc* {
+    LIBS+=-L"$$shareRoot/../zlib1.3.1Lib/lib" -lzlibstaticd
+}
+
 # Default rules for deployment.
 unix {
     target.path = /usr/lib
